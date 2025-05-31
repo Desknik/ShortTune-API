@@ -1,0 +1,32 @@
+# Configurações de line endings para o Git
+# Garante que todos os arquivos de texto usem LF no repositório
+* text=auto
+
+# Força arquivos específicos a usar LF
+*.py text eol=lf
+*.js text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+*.txt text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.toml text eol=lf
+*.cfg text eol=lf
+*.ini text eol=lf
+
+# Arquivos que devem permanecer como estão
+*.exe binary
+*.dll binary
+*.so binary
+*.dylib binary
+*.jpg binary
+*.jpeg binary
+*.png binary
+*.gif binary
+*.ico binary
+*.mp3 binary
+*.wav binary
+*.mp4 binary
+*.avi binary
+*.mkv binary
+*.mov binary

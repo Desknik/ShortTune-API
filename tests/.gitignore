@@ -1,0 +1,10 @@
+# Pytest cache
+.pytest_cache/
+
+# Test outputs
+htmlcov/
+.coverage
+.coverage.*
+
+# Temp test files
+temp_test/
