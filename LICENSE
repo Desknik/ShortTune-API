@@ -1,0 +1,81 @@
+MIT License
+
+Copyright (c) 2025 ShortTune API
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+
+## Third-Party Licenses and Attributions
+
+This project uses several open-source libraries and tools. We acknowledge and thank the developers of these projects:
+
+### Core Dependencies
+- **FastAPI** (MIT License) - Modern, fast web framework for building APIs
+- **yt-dlp** (Unlicense) - A youtube-dl fork with additional features
+- **OpenAI Whisper** (MIT License) - Automatic speech recognition system
+- **FFmpeg** (LGPL/GPL License) - Complete, cross-platform solution for audio/video processing
+
+### Python Libraries
+- **uvicorn** (BSD License) - Lightning-fast ASGI server
+- **pydantic** (MIT License) - Data validation using Python type annotations
+- **ytmusicapi** (MIT License) - Unofficial API for YouTube Music
+- **python-multipart** (Apache License 2.0) - Streaming multipart parser
+
+### Development Tools
+- **pytest** (MIT License) - Testing framework
+- **Docker** (Apache License 2.0) - Containerization platform
+
+## Educational Use and Fair Use
+
+This software is designed for educational purposes and research in the field of audio processing and AI transcription. Users are responsible for ensuring their use complies with:
+
+1. **YouTube Terms of Service** - Respect platform policies and rate limits
+2. **Copyright Laws** - Only process content you have rights to use
+3. **Fair Use Principles** - Educational, research, or personal use
+4. **Local Regulations** - Comply with your jurisdiction's laws
+
+## Disclaimer
+
+The authors and contributors of this project:
+- Do not encourage or support copyright infringement
+- Are not responsible for any misuse of this software
+- Provide this tool for educational and research purposes only
+- Recommend respecting content creators' rights and platform terms
+
+Users should:
+- Obtain proper permissions for commercial use
+- Respect content creators and their intellectual property
+- Use this tool responsibly and ethically
+- Comply with all applicable laws and regulations
+
+## Attribution
+
+If you use this software in your research or project, please consider citing:
+
+```
+ShortTune API - Complete Python API for creating short musical videos
+GitHub: https://github.com/Desknik/ShortTune-API
+License: MIT
+```
+
+For academic use, please include appropriate citations to the underlying technologies:
+- OpenAI Whisper research papers
+- FFmpeg project documentation
+- FastAPI framework references
