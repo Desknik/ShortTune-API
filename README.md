@@ -23,6 +23,44 @@ Complete API for creating short music videos with advanced search, download, tra
 - **4GB+ RAM** (for local transcription)
 - **Storage**: 2GB+ free space for temporary files
 
+## 🛠️ FFmpeg Installation
+
+FFmpeg is required for audio processing. Install it first:
+
+### Windows
+```bash
+# Using Chocolatey (recommended)
+choco install ffmpeg
+
+# Using Scoop
+scoop install ffmpeg
+
+# Manual download from https://ffmpeg.org/download.html
+# Extract to C:\ffmpeg and add C:\ffmpeg\bin to PATH
+```
+
+### Linux (Ubuntu/Debian)
+```bash
+sudo apt update
+sudo apt install ffmpeg
+```
+
+### macOS
+```bash
+# Using Homebrew
+brew install ffmpeg
+
+# Using MacPorts
+sudo port install ffmpeg
+```
+
+### Verify Installation
+```bash
+ffmpeg -version
+```
+
+> **Note**: The API will automatically detect FFmpeg in common locations and configure the PATH accordingly.
+
 ## 🔧 Quick Installation
 
 ### Option 1: Local Development
@@ -88,27 +126,6 @@ OPENAI_API_KEY=your_openai_api_key_here
 # Advanced Settings
 WHISPER_MODEL=base  # tiny, base, small, medium, large
 AUDIO_QUALITY=high  # low, medium, high
-```
-
-### FFmpeg Setup (Auto-configured)
-
-The API automatically configures FFmpeg. For manual installation:
-
-```bash
-# Windows (Chocolatey)
-choco install ffmpeg
-
-# Windows (Scoop)
-scoop install ffmpeg
-
-# Linux Ubuntu/Debian
-sudo apt update && sudo apt install ffmpeg
-
-# macOS
-brew install ffmpeg
-
-# Verify installation
-ffmpeg -version
 ```
 
 ## 🚀 Running the Server

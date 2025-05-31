@@ -136,4 +136,5 @@ Thumbs.db
 # FFmpeg binaries (large external dependency)
 ffmpeg-master-latest-win64-gpl/
 ffmpeg/
+ffmpeg.zip
 *.exe
