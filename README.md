@@ -28,6 +28,7 @@ Complete API for creating short music videos with advanced search, download, tra
 FFmpeg is required for audio processing. Install it first:
 
 ### Windows
+
 ```bash
 # Using Chocolatey (recommended)
 choco install ffmpeg
@@ -40,12 +41,14 @@ scoop install ffmpeg
 ```
 
 ### Linux (Ubuntu/Debian)
+
 ```bash
 sudo apt update
 sudo apt install ffmpeg
 ```
 
 ### macOS
+
 ```bash
 # Using Homebrew
 brew install ffmpeg
@@ -55,6 +58,7 @@ sudo port install ffmpeg
 ```
 
 ### Verify Installation
+
 ```bash
 ffmpeg -version
 ```

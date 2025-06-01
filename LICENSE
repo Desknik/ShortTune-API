@@ -27,18 +27,21 @@ SOFTWARE.
 This project uses several open-source libraries and tools. We acknowledge and thank the developers of these projects:
 
 ### Core Dependencies
+
 - **FastAPI** (MIT License) - Modern, fast web framework for building APIs
 - **yt-dlp** (Unlicense) - A youtube-dl fork with additional features
 - **OpenAI Whisper** (MIT License) - Automatic speech recognition system
 - **FFmpeg** (LGPL/GPL License) - Complete, cross-platform solution for audio/video processing
 
 ### Python Libraries
+
 - **uvicorn** (BSD License) - Lightning-fast ASGI server
 - **pydantic** (MIT License) - Data validation using Python type annotations
 - **ytmusicapi** (MIT License) - Unofficial API for YouTube Music
 - **python-multipart** (Apache License 2.0) - Streaming multipart parser
 
 ### Development Tools
+
 - **pytest** (MIT License) - Testing framework
 - **Docker** (Apache License 2.0) - Containerization platform
 
@@ -54,12 +57,14 @@ This software is designed for educational purposes and research in the field of 
 ## Disclaimer
 
 The authors and contributors of this project:
+
 - Do not encourage or support copyright infringement
 - Are not responsible for any misuse of this software
 - Provide this tool for educational and research purposes only
 - Recommend respecting content creators' rights and platform terms
 
 Users should:
+
 - Obtain proper permissions for commercial use
 - Respect content creators and their intellectual property
 - Use this tool responsibly and ethically
@@ -76,6 +81,7 @@ License: MIT
 ```
 
 For academic use, please include appropriate citations to the underlying technologies:
+
 - OpenAI Whisper research papers
 - FFmpeg project documentation
 - FastAPI framework references

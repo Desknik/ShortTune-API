@@ -24,6 +24,7 @@ class SearchResult(BaseModel):
     artist: str = Field(..., description="Nome do artista")
     duration: Optional[str] = Field(None, description="Duração da música")
     thumbnail: Optional[str] = Field(None, description="URL da thumbnail")
+    colors: Optional[List[str]] = Field(None, description="Cores dominantes da capa (3-4 cores em hex)")
 
 
 class SearchResponse(BaseModel):

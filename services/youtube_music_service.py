@@ -2,6 +2,8 @@ from ytmusicapi import YTMusic
 from typing import List, Optional
 from models.schemas import SearchResult
 from config.logging import logger
+from utils.color_extractor import color_extractor
+import asyncio
 
 
 class YouTubeMusicService:
@@ -36,11 +38,21 @@ class YouTubeMusicService:
                         duration = item['duration']
                     elif 'duration_seconds' in item:
                         duration = f"{item['duration_seconds']}s"
-                    
-                    # Thumbnail
+                      # Thumbnail
                     thumbnail = None
                     if 'thumbnails' in item and item['thumbnails']:
                         thumbnail = item['thumbnails'][-1].get('url')  # Maior qualidade
+                    
+                    # Extrai cores da thumbnail/capa
+                    colors = None
+                    if thumbnail:
+                        try:
+                            colors = await color_extractor.extract_colors_from_url(thumbnail, color_count=4)
+                        except Exception as e:
+                            logger.warning(f"Erro ao extrair cores da thumbnail: {e}")
+                            colors = color_extractor.get_default_colors()
+                    else:
+                        colors = color_extractor.get_default_colors()
                     
                     if video_id:  # Só adiciona se tiver video_id válido
                         result = SearchResult(
@@ -48,7 +60,8 @@ class YouTubeMusicService:
                             title=title,
                             artist=artist,
                             duration=duration,
-                            thumbnail=thumbnail
+                            thumbnail=thumbnail,
+                            colors=colors
                         )
                         results.append(result)
                         
