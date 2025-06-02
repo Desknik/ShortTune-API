@@ -13,6 +13,11 @@ class TranscriptionEngine(str, Enum):
     OPENAI = "openai"
 
 
+class TranslationEngine(str, Enum):
+    AI_MODEL = "ai_model"
+    DEEP_TRANSLATOR = "deep_translator"
+
+
 # Search Models
 class SearchRequest(BaseModel):
     query: str = Field(..., description="Termo de busca para a música")

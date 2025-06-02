@@ -148,8 +148,28 @@ if response.status_code == 200:
 ```bash
 curl -X POST "http://localhost:8000/transcribe" \
   -F "file=@audio.mp3" \
-  -F "provider=local" \
-  -F "language=en"
+  -F "engine=local" \
+  -F "target_lang=pt"
+```
+
+### Transcription with Translation (AI Models)
+
+```bash
+curl -X POST "http://localhost:8000/transcribe" \
+  -F "file=@audio.mp3" \
+  -F "engine=local" \
+  -F "target_lang=pt" \
+  -F "translation_engine=ai_model"
+```
+
+### Transcription with Translation (Google Translate)
+
+```bash
+curl -X POST "http://localhost:8000/transcribe" \
+  -F "file=@audio.mp3" \
+  -F "engine=local" \
+  -F "target_lang=pt" \
+  -F "translation_engine=deep_translator"
 ```
 
 ### OpenAI API Transcription (Fallback)
@@ -157,21 +177,28 @@ curl -X POST "http://localhost:8000/transcribe" \
 ```bash
 curl -X POST "http://localhost:8000/transcribe" \
   -F "file=@audio.mp3" \
-  -F "provider=openai" \
-  -F "language=auto"
+  -F "engine=openai" \
+  -F "target_lang=en"
 ```
 
-### Python Example with File Upload
+### Get Available Translation Engines
+
+```bash
+curl -X GET "http://localhost:8000/transcribe/translation-engines"
+```
+
+### Python Example with Translation
 
 ```python
 import requests
 
-# Upload and transcribe audio file
+# Upload and transcribe audio file with translation
 with open("audio.mp3", "rb") as audio_file:
     files = {"file": audio_file}
     data = {
-        "provider": "local",
-        "language": "en"
+        "engine": "local",
+        "target_lang": "pt",  # Traduzir para português
+        "translation_engine": "deep_translator"  # Usar Google Translate
     }
 
     response = requests.post(
@@ -182,58 +209,75 @@ with open("audio.mp3", "rb") as audio_file:
 
 if response.status_code == 200:
     result = response.json()
-    print(f"Transcription completed in {result['processing_time']}s")
-    print(f"Detected language: {result['language']}")
-    print(f"Full text: {result['text']}")
+    print(f"Language detected: {result['language']}")
+    print(f"Full text: {result['full_text']}")
 
-    # Print segments with timestamps
+    # Print segments with translations
     for i, segment in enumerate(result['segments']):
         start = segment['start']
         end = segment['end']
         text = segment['text']
-        print(f"{i+1:2d}. [{start:6.1f}s - {end:6.1f}s]: {text}")
+        translation = segment.get('translation', 'N/A')
+        print(f"{i+1:2d}. [{start:6.1f}s - {end:6.1f}s]")
+        print(f"    Original: {text}")
+        print(f"    Tradução: {translation}")
 ```
 
-### Response Format
+### Response Format with Translation
 
 ```json
 {
   "success": true,
-  "text": "I wake up to the sounds of the silence that allows for my mind to run around...",
-  "language": "english",
-  "provider": "local",
+  "language": "en",
   "segments": [
     {
-      "id": 0,
       "start": 0.0,
       "end": 3.5,
       "text": "I wake up to the sounds",
-      "confidence": 0.95
+      "translation": "Eu acordo com os sons"
     },
     {
-      "id": 1,
       "start": 3.5,
       "end": 7.2,
       "text": "of the silence that allows",
-      "confidence": 0.92
+      "translation": "do silêncio que permite"
     },
     {
-      "id": 2,
       "start": 7.2,
       "end": 11.8,
       "text": "for my mind to run around",
-      "confidence": 0.88
+      "translation": "que minha mente vagueie"
     }
   ],
-  "processing_time": 45.2,
-  "model": "whisper-base",
-  "stats": {
-    "total_segments": 24,
-    "avg_confidence": 0.91,
-    "audio_duration": 165.5
-  }
+  "full_text": "I wake up to the sounds of the silence that allows for my mind to run around..."
 }
 ```
+
+### Translation Engine Comparison
+
+| Engine            | Speed  | Quality | Languages | Internet Required | Description                 |
+| ----------------- | ------ | ------- | --------- | ----------------- | --------------------------- |
+| `ai_model`        | Lento  | Alta    | ~15       | Não               | Modelos Helsinki-NLP locais |
+| `deep_translator` | Rápido | Alta    | 100+      | Sim               | Google Translate via API    |
+
+### Supported Languages
+
+Common language codes supported by both engines:
+
+- `pt` - Português
+- `en` - English
+- `es` - Español
+- `fr` - Français
+- `de` - Deutsch
+- `it` - Italiano
+- `ru` - Русский
+- `ja` - 日本語
+- `ko` - 한국어
+- `zh` - 中文
+- `ar` - العربية
+- `hi` - हिन्दी
+
+For full list, check `/transcribe/translation-engines` endpoint.
 
 ## ✂️ 4. Audio Cutting & Editing
 
