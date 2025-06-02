@@ -53,6 +53,7 @@ class TranscriptionSegment(BaseModel):
     start: float = Field(..., description="Tempo de início em segundos")
     end: float = Field(..., description="Tempo de fim em segundos")
     text: str = Field(..., description="Texto transcrito")
+    translation: Optional[str] = Field(None, description="Tradução do texto para o idioma de destino")
 
 
 class TranscriptionResponse(BaseModel):

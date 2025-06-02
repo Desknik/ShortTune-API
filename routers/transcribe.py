@@ -5,6 +5,7 @@ from services.transcription_service import transcription_service
 from utils.file_manager import file_manager
 from config.settings import settings
 from config.logging import logger
+from utils.translation_utils import translate_segments
 
 router = APIRouter(prefix="/transcribe", tags=["Transcription"])
 
@@ -26,7 +27,8 @@ async def transcribe_audio(
     engine: TranscriptionEngine = Query(
         TranscriptionEngine.LOCAL, 
         description="Engine de transcrição: 'local' (Whisper local) ou 'openai' (API OpenAI)"
-    )
+    ),
+    target_lang: Optional[str] = Query(None, description="Código do idioma de destino para tradução (ex: 'pt', 'en', 'ru')")
 ):
     """
     Transcreve arquivo de áudio com timestamps
@@ -36,6 +38,8 @@ async def transcribe_audio(
     - **engine**: Engine de transcrição
       - `local`: Usa Whisper local (padrão, gratuito)
       - `openai`: Usa API da OpenAI (requer API key)
+    - **target_lang**: Código do idioma de destino para tradução (opcional). Exemplos:
+      - pt (português), en (inglês), es (espanhol), fr (francês), de (alemão), ru (russo), it (italiano), nl (holandês), pl (polonês), tr (turco), ar (árabe), zh (chinês), ja (japonês), ko (coreano)
     
     **Formatos suportados:**
     - MP3, WAV, M4A, FLAC, OGG, WEBM
@@ -58,7 +62,8 @@ async def transcribe_audio(
             {
                 "start": 0.0,
                 "end": 3.5,
-                "text": "Esta é uma música incrível"
+                "text": "Esta é uma música incrível",
+                "translation": "This is an amazing song"
             }
         ],
         "full_text": "Esta é uma música incrível..."
@@ -114,14 +119,19 @@ async def transcribe_audio(
         
         # Executa transcrição
         result = await transcription_service.transcribe_audio(temp_filepath, engine)
-        
+
+        # Tradução opcional dos segmentos
+        segments = [s.dict() if hasattr(s, 'dict') else dict(s) for s in result['segments']]
+        if target_lang:
+            segments = translate_segments(segments, target_lang)
+
         # Agenda limpeza do arquivo
         background_tasks.add_task(cleanup_file, temp_filepath)
-        
+
         response = TranscriptionResponse(
             success=True,
             language=result.get('language'),
-            segments=result['segments'],
+            segments=segments,
             full_text=result['full_text']
         )
         
